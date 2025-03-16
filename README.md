@@ -19,4 +19,3 @@ Tailwind CSS
 Formik & Yup (for form handling and validation)
 Framer Motion (for animations)
 React Router (for navigation)
-Vercel (for deployment)
