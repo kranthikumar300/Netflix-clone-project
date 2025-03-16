@@ -1,26 +1,21 @@
-NetflixGPT
-Imported vite package
-imported tailwind CSS
-installed Framer-Motion (Transistions & Animations)
-Installed React-router-dom (Routing the Pages)
-installed redux toolkit (State Management)
-Features
-Login and Sign up Page
+#Overview
 
-Used Formik Library for from vailidation
-Home
+This is a Netflix-inspired authentication page built using React.js,
+Tailwind CSS, Formik, and Yup for form validation.
+It includes login and signup functionality with client-side validation.
 
-Main container
+#Features
 
-Video Title (Movie Data comes from TMDB API)
-Video Background (Trailer Playing from TMDB API)
-Secondary Container
+Netflix-themed UI using Tailwind CSS,
+Login & Signup form validation with Formik and Yup,
+Smooth animations with Framer Motion,
+Navigation with React Router,
+Deployment on Vercel
 
-Now Playing Movies
-Popular Movies
-Top Rated Movies
-Upcoming Movies
-Jorgans
-Created Custom Hooks
-API
-Fetch data from TMDB API (Now Playing, Popular Movies, Top Rated Movies, Upcoming Movies, Trailer videos)
+Technologies Used
+
+#React.js
+Tailwind CSS
+Formik & Yup (for form handling and validation)
+Framer Motion (for animations)
+React Router (for navigation)
