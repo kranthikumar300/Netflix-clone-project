@@ -14,7 +14,7 @@ const Footer = () => {
           {/* GitHub Button */}
           <div>
             <button className="p-3 px-6 border border-white rounded-lg cursor-pointer transition hover:bg-white hover:text-black">
-              Code in GitHub
+              <a href="https://github.com/kranthikumar300/Netflix-clone-project" target="_blank">Code in GitHub</a>
             </button>
           </div>
           

@@ -1,6 +1,13 @@
 import {motion} from "framer-motion"
+import { useNavigate } from "react-router-dom"
 
 const Header = () => {
+
+  const navigate = useNavigate()
+
+  const handleSignOut = () => {
+    navigate("/login"); // Redirect to the login page
+  };
 
   return (
     <div className="absolute z-10 w-full flex flex-col md:flex-row justify-between items-center px-4 md:px-10 py-5">
@@ -14,6 +21,7 @@ const Header = () => {
           <motion.button
             whileHover={{scale : 1.05}}
             whileTap={{scale : 0.95}}
+            onClick={handleSignOut}
             className="text-white p-3 rounded-md cursor-pointer bg-red-500">Sign Out
           </motion.button>
 

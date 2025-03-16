@@ -1,5 +1,8 @@
 import {motion} from "framer-motion"
 import { useState} from "react"
+import {Formik, Form, Field, ErrorMessage} from "formik"
+import * as Yup from "yup"
+import {useNavigate} from "react-router-dom"
 
 
 const LoginPage = () => {
@@ -7,11 +10,31 @@ const LoginPage = () => {
     //useState Hook for toggle
     const [isLogged, setIsLoggged] = useState(true)
 
+    const navigate = useNavigate();
+
     //Func calling
     const loginToggler = () => {
        setIsLoggged(!isLogged)
     }
 
+    //Schema Validation
+    const validationSchema = Yup.object().shape({
+      fullName : isLogged ? Yup.string()   //Full Name
+      .min(5, "Enter Min 5 characters")
+      .required("Full Name Reuired")
+      : Yup.string(),                     //Email
+      email : Yup.string()
+      .email("Enter Valid Format")
+      .required("email Required"),
+      password : Yup.string()              //Password
+      .min(8, "Password must be in 8 characters")
+      .required("Password Required")
+    })
+
+    const handleSubmit = (values) => {
+      console.log("Form Submitted", values);
+      navigate("/home"); // Redirect to Home page
+    };
   return (
 
     <div className="relative w-full h-screen flex justify-center items-center">
@@ -29,9 +52,20 @@ const LoginPage = () => {
         className="absolute top-5 left-5 w-[150px] md:w-[220px]"
         alt="Netflix-Logo" />
 
-        {/*login & signup Form */}
-        <form
-         onSubmit={(e) => e.preventDefault()}
+        {/*login & signup Form & Formik */}
+        <Formik
+        initialValues={{
+        fullName : "", 
+        email : "", 
+        password : ""}}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+        >
+         
+        { ({ handleSubmit }) => (
+
+          <Form
+         onSubmit={handleSubmit}
          className="absolute text-white w-[95%] max-w-[400px] h-130 p-6 bg-black opacity-80 gap-y-6 rounded-lg flex flex-col text-center justify-center">
 
             <h2 
@@ -39,31 +73,68 @@ const LoginPage = () => {
             {!isLogged ? "Login" : "Sign up"}
             </h2>
 
-            {/*Sign up input */}
-            {isLogged && <input type="text"
-             placeholder="Full Name"
-             className="p-3 border-gray-200 border-1 outline-none"/>}
+            {/*sign in and sign up inputs*/}
+            {isLogged && (
 
-            <input type="email"
-             placeholder="Enter Gmail"
-             className="p-3 border-gray-200 border-1 outline-none" />
+              //full Name input
+              <div>
+                <Field
+                type = "text"
+                name = "fullName"
+                placeholder = "Enter Full Name"
+                className="p-3 border-gray-200 border outline-none w-full"
+                />
+                <ErrorMessage
+                name = "fullName"
+                component = "div"
+                className="text-red-500 text-sm text-left mt-1"
+                />
+              </div>
+            )}
 
-            <input type="password"
-             placeholder="Enter Password"
-             className="p-3 border-gray-200 border-1 outline-none" />
+            {/*email field */}
+            <div>
+              <Field
+               type = "email"
+               name = "email"
+               placeholder = "Enter Your Gmail"
+               className="p-3 border-gray-200 border outline-none w-full"
+              />
+              <ErrorMessage
+               name = "email"
+               component = "div"
+               className="text-red-500 text-sm text-left mt-1"
+              />
+            </div>
+
+            {/* Password Field */}
+            <div>
+              <Field
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                className="p-3 border-gray-200 border outline-none w-full"
+              />
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-500 text-sm text-left mt-1"
+              />
+            </div>
 
             {/*button hover by framer-motion*/}
             <motion.button
-             whileHover={{backgroundColor : "rgba(38, 35, 35, 0.45)"}}
              whileTap = {{scale : 0.95}}
+             type="submit"
              className="bg-red-600 w-full p-3 text-lg cursor-pointer transition-all">submit</motion.button>
 
             <p 
-            className="cursor-pointer"
+            className="cursor-pointer mb-6"
             onClick={loginToggler}>
             {isLogged ? "Already have Account ? Login " : "New to NetflixGPT ? Sign Up"}
             </p>
-        </form>
+        </Form>)}
+        </Formik>
     </div>
 
   )
