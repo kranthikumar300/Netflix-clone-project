@@ -6,7 +6,7 @@ const Header = () => {
   const navigate = useNavigate()
 
   const handleSignOut = () => {
-    navigate("/login"); // Redirect to the login page
+    navigate("/"); // Redirect to the login page
   };
 
   return (

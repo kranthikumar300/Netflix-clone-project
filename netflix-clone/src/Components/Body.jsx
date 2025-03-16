@@ -7,7 +7,7 @@ const Body = ()  => {
     const route = createBrowserRouter([
 
         {
-            path : "/login",
+            path : "/",
             element : <LoginPage/>
         },
         {
